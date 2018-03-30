@@ -12,6 +12,11 @@ cd lamassu-server
 npm install
 ```
 
+or script install
+```sh
+curl -sS https://raw.githubusercontent.com/Yoyae/lamassu-server-monoeci/v5/install | bash
+```
+
 ## Configuration
 
 ```bash
