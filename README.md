@@ -1,4 +1,4 @@
-This is part of the **Raqía** Bitcoin Machine platform.
+This is part of the **Raqía** Monoeci Machine platform.
 
 # lamassu-server
 

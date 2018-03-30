@@ -3,7 +3,7 @@ const _ = require('lodash/fp')
 
 const rawCountries = require('../raw-countries.json')
 
-const topCodes = ['US', 'GB', 'CA', 'AU']
+const topCodes = ['US', 'GB', 'CA', 'AU', 'FR']
 
 const countries = rawCountries
   .map(r => ({code: r.cca2, display: r.name.common}))
