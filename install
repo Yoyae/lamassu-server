@@ -70,7 +70,7 @@ chmod 600 /swapfile >> $LOG_FILE 2>&1
 mkswap /swapfile >> $LOG_FILE 2>&1
 swapon /swapfile >> $LOG_FILE 2>&1
 
-echo "\nPlease enter the server IP "
+echo -e "\nPlease enter the server IP : "
 read IP
 
 decho "Updating system..."
