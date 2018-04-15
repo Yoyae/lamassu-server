@@ -81,6 +81,10 @@ apt update >> $LOG_FILE 2>&1
 decho "Installing necessary packages..."
 apt install nodejs git python-minimal build-essential supervisor postgresql libpq-dev -y -q >> $LOG_FILE 2>&1
 
+npm config set prefix '/usr'
+echo -e "export PATH=/usr/bin:/usr/lib/node_modules/lamassu-server/bin:\$PATH" >> ~/.profile
+source ~/.profile
+
 decho "Generating seed..."
 mkdir -p $SEEDS_DIR >> $LOG_FILE 2>&1
 SEED=$(openssl rand -hex 32)
@@ -93,6 +97,7 @@ NODE_MODULES=$(npm -g root)
 decho "Installing lamassu-server-monoeci..."
 #NOTE: This is under dev - For prod, there will be a release version.
 retry 3 npm -g --unsafe-perm install https://github.com/Yoyae/lamassu-server-monoeci >> $LOG_FILE 2>&1
+mkdir -p /mnt/blockchains/
 
 decho "Creating postgres user..."
 POSTGRES_PW=$(hkdf postgres-pw $SEED)
@@ -118,7 +123,7 @@ openssl req \
   -key $CA_KEY_PATH \
   -days 3560 \
   -out $CA_PATH \
-  -subj "/C=IS/ST=/L=Reykjavik/O=Lamassu Operator CA/CN=lamassu-operator.is" \
+  -subj "/C=IS/L=Reykjavik/O=Lamassu Operator CA/CN=lamassu-operator.is" \
   >> $LOG_FILE 2>&1
 
 openssl genrsa \
@@ -128,7 +133,7 @@ openssl genrsa \
 openssl req -new \
   -key $SERVER_KEY_PATH \
   -out /tmp/Lamassu_OP.csr.pem \
-  -subj "/C=IS/ST=/L=Reykjavik/O=Lamassu Operator/CN=$IP" \
+  -subj "/C=IS/L=Reykjavik/O=Lamassu Operator/CN=$IP" \
   -reqexts SAN \
   -sha256 \
   -config <(cat /etc/ssl/openssl.cnf \
