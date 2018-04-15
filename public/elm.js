@@ -33626,6 +33626,8 @@ var _user$project$Transactions$multiplier = function (code) {
 			return 1.0e8;
 		case 'DASH':
 			return 1.0e8;
+		case 'XMCC':
+			return 1.0e8;
 		case 'LTC':
 			return 1.0e8;
 		default:
